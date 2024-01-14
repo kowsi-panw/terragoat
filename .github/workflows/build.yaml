@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   build:
-    runs-on: M-PF3C9GFNQD
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
         name: Checkout repo
