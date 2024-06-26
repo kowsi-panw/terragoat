@@ -53,7 +53,7 @@ resource "aws_lambda_function" "analysis_lambda" {
     git_last_modified_at = "2021-05-02 10:06:10"
     git_last_modified_by = "nimrodkor@users.noreply.github.com"
     git_modifiers        = "nimrodkor"
-    git_org              = "bridgecrewio"
+    git_org              = "kowsi-panw"
     git_repo             = "terragoat"
     yor_trace            = "f7d8bc47-e5d9-4b09-9d8f-e7b9724d826e"
     yor_name             = "analysis_lambda"
