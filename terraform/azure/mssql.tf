@@ -16,6 +16,7 @@ resource "azurerm_storage_account" "security_storage_account" {
     yor_trace            = "4b504d4d-608c-45fe-ae56-807bde6d969f"
     yor_name             = "security_storage_account"
   }
+  allow_nested_items_to_be_public = true
 }
 
 resource "azurerm_mssql_server" "mssql1" {
