@@ -30,6 +30,7 @@ resource "azurerm_key_vault" "example" {
     }, {
     yor_name = "example"
   })
+  public_network_access_enabled = false
 }
 
 resource "azurerm_key_vault_key" "generated" {
