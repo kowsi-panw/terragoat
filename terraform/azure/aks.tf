@@ -7,6 +7,7 @@ resource azurerm_kubernetes_cluster "k8s_cluster" {
     type = "SystemAssigned"
   }
   default_node_pool {
+    enable_host_encryption = true
     name       = "default"
     vm_size    = "Standard_D2_v2"
     node_count = 2
