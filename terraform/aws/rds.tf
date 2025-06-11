@@ -30,6 +30,7 @@ resource "aws_rds_cluster" "app2-rds-cluster" {
     yor_trace            = "d33c9292-952b-4c1f-9973-b6dbad519461"
     yor_name             = "app2-rds-cluster"
   }
+  enabled_cloudwatch_logs_exports = "CKV_ANY"
 }
 
 resource "aws_rds_cluster" "app3-rds-cluster" {
