@@ -1,28 +1,56 @@
-name: build
+
+name: Cortex CLI Code Scan
+
 on:
-  pull_request:
   push:
     branches:
-      - master    
+      - main
+  workflow_dispatch:
+
+env:
+  CORTEX_API_KEY: ${{secrets.CORTEX_API_KEY}}
+  CORTEX_API_KEY_ID: ${{secrets.CORTEX_API_KEY_ID}}
+  CORTEX_API_URL: https://api-ms-cxsiamp.xdr.us.paloaltonetworks.com
+  
 jobs:
-  scan:
-    runs-on: ubuntu-latest 
-    permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for GitHub/codeql-action/upload-sarif to upload SARIF results
-     
+  cortex-code-scan:
+    runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
     
-    - name: Run checkov 
-      id: build
-      uses: bridgecrewio/checkov-action@master
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
       with:
-        directory: terraform/
-        soft_fail: true
-        api-key: ${{ secrets.BC_API_KEY }}
-      env:
-        PRISMA_API_URL: https://api.ca.prismacloud.io
+        node-version: 22
+
+    - name: Verify Node.js Version
+      run: node -v
+
+    - name: Download cortexcli
+      run: |
+        set -x
+        crtx_resp=$(curl "${CORTEX_API_URL}/public_api/v1/unified-cli/releases/download-link?os=linux&architecture=amd64" \
+          -H "x-xdr-auth-id: ${CORTEX_API_KEY_ID}" \
+          -H "Authorization: ${CORTEX_API_KEY}")
+        crtx_url=$(echo $crtx_resp | jq -r ".signed_url")
+        curl -o cortexcli $crtx_url
+        chmod +x cortexcli
+        ./cortexcli --version
+
+    - name: Run Cortex CLI Code Scan
+      run: |
+        ./cortexcli \
+          --api-base-url "${CORTEX_API_URL}" \
+          --api-key "${CORTEX_API_KEY}" \
+          --api-key-id "${CORTEX_API_KEY_ID}" \
+          code scan \
+          --directory "${{github.workspace}}" \
+          --repo-id "${{github.repository}}" \
+          --branch "${{github.ref_name}}" \
+          --source "GITHUB_ACTIONS" \
+          --create-repo-if-missing
         
     - name: Upload SARIF file
       uses: GitHub/codeql-action/upload-sarif@v2
