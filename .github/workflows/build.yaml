@@ -52,15 +52,15 @@ jobs:
           --source "GITHUB_ACTIONS" \
           --create-repo-if-missing
         
-    - name: Upload SARIF file
-      uses: GitHub/codeql-action/upload-sarif@v2
+ #   - name: Upload SARIF file
+ #     uses: GitHub/codeql-action/upload-sarif@v2
       
       # Results are generated only on a success or failure
       # this is required since GitHub by default won't run the next step
       # when the previous one has failed. Alternatively, enable soft_fail in checkov action.
-      if: success() || failure()
-      with:
-        sarif_file: results.sarif
+  #    if: success() || failure()
+   #   with:
+    #    sarif_file: results.sarif
 # name: build
 # on:
 #   push:
