@@ -1,4 +1,6 @@
-name: build
+
+name: Cortex CLI Code Scan
+
 on:
   push:
     branches:
