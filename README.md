@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# TerraGoat - Vulnerable Terraform Infrastructure - cortex cloud demo AppSec - update 1
+# TerraGoat - Vulnerable Terraform Infrastructure - cortex cloud demo AppSec - update 2
 =======
 # TerraGoat - Vulnerable Terraform Infrastructure - cortex cloud demo AppSec
 >>>>>>> parent of 375f5ea (update build.yml)
