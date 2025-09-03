@@ -13,6 +13,7 @@ resource "google_storage_bucket" "terragoat_website" {
     yor_trace            = "bd00cd2e-f53f-4daf-8d4d-74c47846c1cc"
     yor_name             = "terragoat_website"
   }
+  public_access_prevention = "enforced"
 }
 
 resource "google_storage_bucket_iam_binding" "allow_public_read" {
