@@ -47,6 +47,7 @@ resource "aws_rds_cluster" "app3-rds-cluster" {
     yor_trace            = "2a8584b1-7e9d-4739-8e37-366620c92027"
     yor_name             = "app3-rds-cluster"
   }
+  storage_encrypted = true
 }
 
 resource "aws_rds_cluster" "app4-rds-cluster" {
