@@ -41,6 +41,9 @@ resource azurerm_linux_virtual_machine "linux_machine" {
     }, {
     yor_name = "linux_machine"
   })
+  admin_ssh_key {
+    public_key = "CKV_ANY"
+  }
 }
 
 resource azurerm_windows_virtual_machine "windows_machine" {
